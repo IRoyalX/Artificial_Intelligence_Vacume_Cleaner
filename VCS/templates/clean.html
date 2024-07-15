@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vacume Cleaner</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+    <link rel="stylesheet" type="text/css" href='../static/css/clean.css'>    
+</head>
+<body>
+    <div class="container">
+        <form>
+            <h1 id="title">Process is running ...</h1>
+            <div>
+                {% for i in rooms %}
+                <div>
+                    {% for j in i %}
+                    <input name={{ j }} type="submit" id="clean" value=" " disabled>
+                    {% endfor %}
+                </div>
+                {% endfor %}
+            </div>
+        </form>
+        <form id="ft">
+            <h1 id="txt"></h1>
+        </form>
+    </div>
+    <script>
+        async function main() {
+            var col = {{ col }}, inf = {{ inf }}, mvs = {{ mvs | tojson }}, count = 0;
+            var but = document.querySelectorAll('input[type="submit"]');
+            var txt = document.getElementById('txt');
+            var title = document.getElementById('title');
+            for (var i=0; i<inf.length; i++) {
+                var selection = but[inf[i][0] * col + inf[i][1]];
+                var status = selection.id;
+                selection.id = "pos"
+                selection.value = "@";
+                txt.innerHTML = "Agent in room: [" + selection.getAttribute("name") + "]<br>Status: " + status + "<br>Action: ";
+                if (status === "dirty") {
+                    count++
+                    selection.id = "cleaning";
+                    if (i != inf.length-1)
+                        txt.innerHTML += "cleaning & ";
+                    else
+                        txt.innerHTML += "cleaning"
+                }
+                if (i != inf.length-1)
+                    txt.innerHTML += "moving " + mvs[i];
+                else
+                    txt.innerHTML += " -";
+                await sleep(2500);
+                selection.id = "clean";
+            }
+            txt.innerHTML = "' " + count + " ' room(s)<br>have been cleaned in total";
+            title.textContent = "Finished !"
+        }
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+        main();
+    </script>
+</body>
+</html>

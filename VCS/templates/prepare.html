@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vacume Cleaner</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+    <link rel="stylesheet" type="text/css" href='../static/css/prepare.css'>    
+</head>
+<body>
+    <div class="container">
+        <h1>{{ title }}</h1>
+        <form action="{{ url_for(id) }}" method="post">
+            <div>
+                {% for i in rooms %}
+                <div>
+                    {% for j in i %}
+                    <input name={{ j }} type="{{ type }}" id="{{ id }}" value="">
+                    {% endfor %}
+                </div>
+                {% endfor %}
+            </div>
+            <input type="submit" id="sub" value="CONTINUE" {{ sub }}>
+        </form>
+    </div>
+</body>
+</html>
