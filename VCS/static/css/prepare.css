@@ -1,0 +1,41 @@
+input {
+    appearance: none;
+    width: 35px;
+    height: 34px;
+    margin: 0;
+    background-color: white;
+    border-radius: 100px;
+    border: 2px solid #202626;
+    cursor: pointer;
+    border-radius: 100px;
+    margin-bottom: 3.7px;
+}
+
+input[type="checkbox"] {
+    margin-bottom: 3.3;
+}
+ 
+input:hover, #dirty:hover{
+    background-color: #0074d9;
+}
+
+#prepare:checked, #dirty {    
+    background-color: red;
+}
+
+#clean:active, #dirty:active{
+    background-color: slateblue;
+}
+
+#sub {
+    width: 100px;
+    padding: 6px;
+    margin-top: 10px;
+    background-color: #0074d9;
+    color: #ffffff;
+    border: 0;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 6px;
+    font-size: 16px;
+}
